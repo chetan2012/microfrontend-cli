@@ -1,26 +1,41 @@
 {
-  "name": "react-microfrontend-cli",
+  "name": "react-microfrontend-tool",
   "version": "1.0.2",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-microfrontend": "node ./cli.js"
   },
-  "keywords": [],
-  "author": "chetan2012",
+  "keywords": [
+    "react-microfrontend-cli-tool"
+  ],
+  "author": "chetan2012", 
+  "repository": {
+        "type": "git",
+        "url": "git://github.com/chetan2012/microfrontend-cli"
+    }, 
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "devDependencies": {
     "chalk": "^5.4.1",
     "commander": "^13.0.0",
     "fs-extra": "^11.2.0",
     "html-webpack-plugin": "^5.6.3",
     "inquirer": "^12.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
+  },
+  "files": [
+    "templates/",
+    "cli.js",
+    "LICENSE",
+    "index.js",
+    "Readme.md"
+  ],
+  "engines": {
+    "node": ">= 0.8"
   },
   "bin": {
     "create-microfrontend": "./cli.js"
