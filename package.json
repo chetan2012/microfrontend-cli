@@ -1,6 +1,6 @@
 {
   "name": "react-microfrontend-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,11 +10,11 @@
   "keywords": [
     "react-microfrontend-cli-tool"
   ],
-  "author": "chetan2012", 
+  "author": "chetan2012",
   "repository": {
-        "type": "git",
-        "url": "git://github.com/chetan2012/microfrontend-cli"
-    }, 
+    "type": "git",
+    "url": "git://github.com/chetan2012/microfrontend-cli"
+  },
   "license": "ISC",
   "description": "",
   "devDependencies": {
