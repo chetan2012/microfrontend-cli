@@ -1,13 +1,13 @@
 {
-  "name": "micro-frontend-cli",
-  "version": "1.0.1",
+  "name": "react-microfrontend-cli",
+  "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "chetan2012",
   "license": "ISC",
   "description": "",
   "dependencies": {
