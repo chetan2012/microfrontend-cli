@@ -23,23 +23,24 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'hostApp', // Name for the host app
-      remotes: {
-        remoteApp: 'remoteApp@http://localhost:3001/remoteEntry.js', // Remote app URL
+      name: '<%= microfrontends.name %>',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Button': './src/components/Button',
       },
       shared: {
-        react: { singleton: true, eager: true }, // Share React between host and remote apps
+        react: { singleton: true, eager: true },
         'react-dom': { singleton: true, eager: true },
       },
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html', // Path to your HTML template
-    }),
+          template: './public/index.html', // Path to your HTML template
+        }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'), // serve static files from the "public" folder
-    },
-    port: 3000,
+          directory: path.join(__dirname, 'public'), // serve static files from the "public" folder
+        },
+        port: '<%= microfrontends.port %>',
   },
 };

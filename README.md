@@ -56,13 +56,15 @@ create-microfrontend create
 ? Enter the name of your Host application:
 
 ? Enter the name of your Remote application:
+
+? Enter the count of microfrontends:
 ```
 
-This will create host & remote application.
+This will create host & requested no. of remote applications.
 
 ### Run the Project
 
-Once the project is scaffolded, navigate into the host & remote directory:
+Once the project is scaffolded, navigate into the host & remote directories:
 
 
 You can now run the development server using:
@@ -110,4 +112,4 @@ To work on the CLI tool itself:
 
 ## License
 
-This project is licensed under the ISC License. See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the ISC License. See the [LICENSE] file for details.

@@ -1,0 +1,20 @@
+import React, { Suspense, lazy } from 'react';
+import ReactDOM from 'react-dom';
+
+// Dynamically load micro frontends using Webpack Module Federation
+<%- microfrontends.reduce((acc, mf, index) => {
+  return acc + `const Remote${index+1} = lazy(() => import('${mf.name}/Button'));\n`;
+}, '') %>
+const App = () => (
+  <Suspense fallback="Loading microfrontends with remotes...">
+    <div>
+      <h3>Host Application</h3>
+      <%- microfrontends.reduce((acc, mf, index) => {
+        return acc + `<Remote${index+1} />\n`;
+      }, '') %>
+    </div>
+  </Suspense>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
+

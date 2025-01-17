@@ -20,6 +20,7 @@
   "devDependencies": {
     "chalk": "^5.4.1",
     "commander": "^13.0.0",
+    "ejs": "^3.1.10",
     "fs-extra": "^11.2.0",
     "html-webpack-plugin": "^5.6.3",
     "inquirer": "^12.3.0",
