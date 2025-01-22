@@ -2,13 +2,13 @@ react-microfrontend-tool
 
 ## Description
 
-**react-microfrontend-tool** is a powerful command-line tool that helps you set up a micro frontend architecture using Webpack Module Federation with React. It automates the initial project setup, allowing you to focus on building your application.
+**react-microfrontend-tool** is a powerful command-line tool that helps you set up a micro frontend architecture using Webpack/Vite Module Federation with React. It automates the initial project setup, allowing you to focus on building your application.
 
 ## Features
 
 - **Latest React Version**: Always uses the latest version of React.
 - **Optimized Folder Structure**: Project structure based on best practices.
-- **Webpack Setup**: Automatic Webpack configuration for development and production builds.
+- **Webpack Setup**: Automatic Webpack/Vite configuration for development and production builds.
 
 ## Installation
 
@@ -42,6 +42,8 @@ The CLI will prompt you for several configuration options:
 
 1. **Host Application**: Enter the name of your Host application.
 2. **Remote Application**: Enter the name of your Remote application.
+2. **Number of Remote**: Enter the number of your Remote application.
+2. **Bundle tool**: Select the bundle tool.
 
 
 ### Example
@@ -57,10 +59,26 @@ create-microfrontend create
 
 ? Enter the name of your Remote application:
 
-? Enter the count of microfrontends:
+? Enter the count of microfrontends to add (1-10):
+
+? Select the Bundle tool:
 ```
 
 This will create host & requested no. of remote applications.
+
+### Example
+
+```bash
+create-microfrontend add-remote-to-host
+```
+
+### Sample Prompt Flow:
+
+```bash
+? Enter the count of microfrontends to add (1-10):
+```
+
+This will add requested no. of remote applications with existing remotes.
 
 ### Run the Project
 
@@ -108,6 +126,8 @@ To work on the CLI tool itself:
 
    ```bash
    create-microfrontend create
+
+   create-microfrontend add-remote-to-host
    ```
 
 ## License
