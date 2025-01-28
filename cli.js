@@ -123,7 +123,7 @@ const createApplication = async ({
       try {
         // Asynchronously check if the host index template exists
         await fs.access(hostIndex);
-        await renderTemplate(path.join(targetDir, 'src', 'index.js'), hostIndex, { microfrontends });
+        await renderTemplate(path.join(targetDir, 'src', 'index.jsx'), hostIndex, { microfrontends });
       } catch (error) {
         // If the file doesn't exist, throw an error
         throw new Error(`Host index template not found: ${hostIndex}`);

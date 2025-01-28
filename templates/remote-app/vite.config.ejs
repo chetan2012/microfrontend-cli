@@ -5,6 +5,16 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [
+  {
+    name: 'custom-html-plugin',
+    transformIndexHtml(html) {
+      // Ensure Vite's main script tag is injected into the body
+      return html.replace(
+        '</body>',
+        '<script type="module" src="/src/index.jsx"></script></body>'
+      );
+    },
+  },
     react(),
     federation({
       name: '<%= microfrontends.name %>',
@@ -32,9 +42,11 @@ export default defineConfig({
       usePolling: true, // Useful if you have file system issues on certain environments
     },
   },
+  root: './', // Ensure this is correct
   build: {
     target: 'esnext', // Ensure modern JavaScript for production builds
     rollupOptions: {
+      input: '/index.jsx',
       output: {
         // Configure file names to include hash for cache busting
         entryFileNames: '[name].[hash].js',
