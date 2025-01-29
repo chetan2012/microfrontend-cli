@@ -216,7 +216,7 @@ const createMicrofrontend = async ({ hostApplicationName, remoteApplicationName,
   const targetRemoteDir = path.resolve(remoteApplicationName);
 
   // Create host application
-  if (!(await confirmOverwrite(targetHostDir, 'host'))) return;
+  if ((await confirmOverwrite(targetHostDir, 'host')))
   await createApplication({ applicationName: hostApplicationName, sourceDir: 'host-app', targetDir: targetHostDir, port: 3000, remoteApplicationCount, remoteApplicationName, microfrontendTool });
 
   // Create remote applications
@@ -229,7 +229,7 @@ const createMicrofrontend = async ({ hostApplicationName, remoteApplicationName,
 };
 
 // Add more remote apps to the host
-const addRemotesToHost = async (remoteApplicationName, remoteApplicationCount, hostApplicationName, existingRemoteCount) => {
+const addRemotesToHost = async (remoteApplicationName, remoteApplicationCount, hostApplicationName, existingRemoteCount, microfrontendTool) => {
   const targetHostDir = path.resolve(hostApplicationName);
   try {
     await fs.access(targetHostDir);
@@ -240,7 +240,7 @@ const addRemotesToHost = async (remoteApplicationName, remoteApplicationCount, h
 
   for (let i = existingRemoteCount; i < existingRemoteCount + remoteApplicationCount; i++) {
     const remoteDir = `${remoteApplicationName}_${i + 1}`;
-    await createApplication({ applicationName: remoteDir, sourceDir: 'remote-app', targetDir: path.resolve(remoteDir), port: 3000 + i + 1 });
+    await createApplication({ applicationName: remoteDir, sourceDir: 'remote-app', targetDir: path.resolve(remoteDir), port: 3000 + i + 1, undefined, undefined, microfrontendTool });
   }
 };
 
@@ -248,7 +248,7 @@ program
   .command('create')
   .description('Create a new microfrontend project')
   .action(async () => {
-    //try {
+    try {
     const { hostApplicationName, remoteApplicationName, remoteApplicationCount, microfrontendTool } = await promptForInput([
       { type: 'input', name: 'hostApplicationName', message: 'Enter the name of your Host application:', validate: (input) => input ? true : 'Host application name is required!' },
       { type: 'input', name: 'remoteApplicationName', message: 'Enter the name of your Remote application:', validate: (input) => input ? true : 'Remote application name is required!' },
@@ -262,11 +262,11 @@ program
       },
     ]);
 
-    saveSetupToFile({ hostApplicationName, remoteApplicationName, remoteApplicationCount, microfrontendTool });
     await createMicrofrontend({ hostApplicationName, remoteApplicationName, remoteApplicationCount, microfrontendTool });
-    // } catch (error) {
-    //   console.log(chalk.red('Error during creation:', error.message));
-    // }
+    saveSetupToFile({ hostApplicationName, remoteApplicationName, remoteApplicationCount, microfrontendTool });
+    } catch (error) {
+      console.log(chalk.red('Error during creation:', error.message));
+    }
   });
 
 program
@@ -280,7 +280,7 @@ program
         return;
       }
 
-      const { hostApplicationName, remoteApplicationName, remoteApplicationCount } = lastConfig;
+      const { hostApplicationName, remoteApplicationName, remoteApplicationCount, microfrontendTool } = lastConfig;
 
       // Check if remotes have already been added
       if (lastConfig.remoteApplicationCount > 10) {
@@ -293,7 +293,7 @@ program
       ]);
 
       saveSetupToFile({ ...lastConfig, remoteApplicationCount: parseInt(remoteApplicationCount, 10) + parseInt(remoteApplicationCountToAdd, 10) });
-      await addRemotesToHost(remoteApplicationName, parseInt(remoteApplicationCountToAdd, 10), hostApplicationName, parseInt(remoteApplicationCount, 10));
+      await addRemotesToHost(remoteApplicationName, parseInt(remoteApplicationCountToAdd, 10), hostApplicationName, parseInt(remoteApplicationCount, 10), microfrontendTool);
     } catch (error) {
       console.log(chalk.red('Error adding remotes:', error.message));
     }
